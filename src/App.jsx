@@ -2,7 +2,7 @@ import { AppContext } from "./contexts/AppContext";
 import Navbar from "./components/Navbar";
 import SearchBar from "./components/SearchBar";
 import SubHeader from "./components/SubHeader";
-SubHeader;
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
       <Navbar></Navbar>
       <SearchBar></SearchBar>
       <SubHeader></SubHeader>
+      <Footer></Footer>
     </div>
   );
 }
