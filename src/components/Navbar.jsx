@@ -3,7 +3,8 @@ import { useContext } from "react";
 import { AppContext } from "./../contexts/AppContext";
 
 function Navbar() {
-  const { isOpen, setisOpen,setisSearchOpen,isSearchOpen } = useContext(AppContext);
+  const { isOpen, setisOpen, setisSearchOpen, isSearchOpen } =
+    useContext(AppContext);
 
   return (
     <div className="flex justify-center  lg:grid grid-cols-3  bg-gradient-to-r from-slate-800 via-blue-800 to-gray-700  w-screen lg:h-[400px] p-6 lg:p-0 lg:justify-between">
@@ -34,9 +35,12 @@ function Navbar() {
           <button className="lg:text-white lg:text-3xl text-2xl  p-6  hover:text-pink-400 hover:text-4xl ">
             Home
           </button>
-          <button onClick={()=>{
-            setisSearchOpen(!isSearchOpen)
-          }} className="lg:text-white lg:text-3xl text-2xl p-6  hover:text-pink-400 hover:text-4xl">
+          <button
+            onClick={() => {
+              setisSearchOpen(!isSearchOpen);
+            }}
+            className="lg:text-white lg:text-3xl text-2xl p-6  hover:text-pink-400 hover:text-4xl"
+          >
             Search
           </button>
           <button className="lg:text-white lg:text-3xl text-2xl p-6  hover:text-pink-400 hover:text-4xl">
