@@ -1,14 +1,10 @@
-import {  useContext, useState } from "react";
-import { AppContext } from './contexts/AppContext';
-import Navbar from './components/Navbar';
-
+import { AppContext } from "./contexts/AppContext";
+import Navbar from "./components/Navbar";
 
 function App() {
-  const { usuario} = useContext(AppContext);
-
   return (
     <div>
-     <Navbar></Navbar>
+      <Navbar></Navbar>
     </div>
   );
 }
