@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Single from "./Pages/Single";
+import Searchpage from "./Pages/SearchPage";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,15 @@ const router = createBrowserRouter([
         <Single></Single>
       </AppProvider>
     ),
-  }
+  },
+  {
+    path: "/Search",
+    element: (
+      <AppProvider>
+        <Searchpage></Searchpage>
+      </AppProvider>
+    ),
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(

@@ -25,6 +25,16 @@ export const AppProvider = ({ children }) => {
     "The Marvels",
   ];
   const [FeatArr, setFeatArr] = useState();
+  const [singleMov, setsingleMov] = useState();
+  const [name, setname] = useState("Zootopia");
+  const [Searchparam, setSearchparam] = useState("");
+  const [FullList, setFullList] = useState();
+  const [page, setpage] = useState(1);
+  const [totalresults, settotalresults] = useState();
+  const [loadingList, setloadingList] = useState(true);
+  function getName(name) {
+    setSearchparam(name);
+  }
 
   function fetchFeatured() {
     const Featured = featuredNames.map((a) => {
@@ -43,10 +53,51 @@ export const AppProvider = ({ children }) => {
       console.log(filtrados);
     });
   }
+
+  function GetSingle() {
+    axios
+      .get(`https://www.omdbapi.com/?t=${name}&apikey=ab6d5543`)
+      .then((r) => {
+        console.log("achadoooo");
+        console.log(r.data);
+        setsingleMov(r.data);
+      })
+      .catch((error) => {
+        console.error("Erro na requisição:", error.message);
+      });
+  }
   useEffect(() => {
     fetchFeatured();
+    GetSingle();
   }, []);
 
+  useEffect(() => {
+    GetSingle();
+  }, [name]);
+
+  useEffect(() => {
+    GetFullList();
+  }, [Searchparam, page, totalresults]);
+  function GetFullList() {
+    axios
+      .get(
+        `https://www.omdbapi.com/?s=${Searchparam}&page=${page}&apikey=ab6d5543`
+      )
+      .then((r) => {
+        console.log("felipinhoo");
+        console.log(r.data);
+        setFullList(r.data);
+        settotalresults(r.data.totalResults);
+        console.log(totalresults);
+        if (totalresults > 0) {
+         setloadingList(false);
+          console.log("foi")
+        }
+      })
+      .catch((error) => {
+        console.error("Erro na requisição:", error.message);
+      });
+  }
   return (
     <AppContext.Provider
       value={{
@@ -56,6 +107,14 @@ export const AppProvider = ({ children }) => {
         setisSearchOpen,
         fetchFeatured,
         FeatArr,
+        GetSingle,
+        singleMov,
+        getName,
+        setpage,
+        page,
+        totalresults,
+        FullList,
+        loadingList,
       }}
     >
       {children}

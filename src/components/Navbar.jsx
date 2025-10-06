@@ -5,7 +5,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const navigate = useNavigate();
-  const { isOpen, setisOpen, setisSearchOpen, isSearchOpen } =
+  const { isOpen, setisOpen, setisSearchOpen, isSearchOpen,GetSingle } =
     useContext(AppContext);
 
   return (
@@ -60,7 +60,9 @@ function Navbar() {
           >
             Search
           </button>
-          <button className="lg:text-white  text-2xl pl-6 pr-6  hover:text-pink-400 border-amber-50 border-2 ">
+          <button onClick={()=>{
+            GetSingle()
+          }} className="lg:text-white  text-2xl pl-6 pr-6  hover:text-pink-400 border-amber-50 border-2 ">
             About
           </button>
         </div>
