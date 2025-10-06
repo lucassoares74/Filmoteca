@@ -11,8 +11,15 @@ function Searchpage() {
   const name = searchParams.get("name");
 
   const navigate = useNavigate();
-  const { setpage, page, totalresults, FullList, loadingList, setSearchparam } =
-    useContext(AppContext);
+  const {
+    setpage,
+    page,
+    totalresults,
+    FullList,
+    loadingList,
+    setSearchparam,
+    setname,
+  } = useContext(AppContext);
   useEffect(() => {
     setSearchparam(name);
   }, []);
@@ -22,13 +29,20 @@ function Searchpage() {
     if (loadingList === false && Array.isArray(FullList.Search)) {
       return FullList.Search.map((a) => {
         return (
-          <div className="bg-slate-400 p-2 rounded-md shadow-black shadow-2xl flex gap-1 justify-center">
+          <button
+            onClick={() => {
+              console.log("fooooooo0ooooooooi");
+              navigate("/Single")
+              setname(a.Title);
+            }}
+            className="bg-slate-400 p-2 rounded-md shadow-black shadow-2xl flex gap-1 justify-center"
+          >
             <img className="h-[250px] rounded-md" src={a.Poster} alt="" />
             <div className="flex flex-col justify-center place-items-center">
               <h1 className="text-gray-300">{a.Year}</h1>
               <h1 className="text-[16px]">{a.Title}</h1>
             </div>
-          </div>
+          </button>
         );
       });
     }

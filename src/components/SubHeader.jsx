@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { AppContext } from "./../contexts/AppContext";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function SubHeader() {
-  const { FeatArr } = useContext(AppContext);
+  const { FeatArr, setname } = useContext(AppContext);
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col place-items-center mt-6 gap-8">
       <div>
@@ -16,11 +18,19 @@ function SubHeader() {
         {FeatArr ? (
           FeatArr.map((a) => {
             return (
-              <div className="flex flex-col " key={a.imdbID}>
+              <button
+                onClick={() => {
+                  console.log("fooooooo0ooooooooi");
+                  navigate("/Single");
+                  setname(a.Title);
+                }}
+                className="flex flex-col "
+                key={a.imdbID}
+              >
                 <img className="h-[300px]" src={a.Poster} alt="" />
                 <h1 className="text-center font-extrabold">{a.Title}</h1>
                 <h1 className="text-center text-slate-500">{a.Year}</h1>
-              </div>
+              </button>
             );
           })
         ) : (
