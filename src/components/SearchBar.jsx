@@ -14,13 +14,13 @@ function SearchBar() {
         </h1>
         <input
           onChange={(event) => {
-            if (location.pathname !== "/Search") {
-              navigate("/Search");
-            }
             setTimeout(() => {
               setpage(1);
+              if (location.pathname !== "/Search") {
+                navigate(`/Search?name=${event.target.value}`);
+              }
               getName(event.target.value);
-            }, 500);
+            }, 2000);
           }}
           className="w-[80%] text-center text-xl px-4 py-3 rounded-md border border-slate-300 focus:outline-none focus:ring-2 focus:ring-rose-500 bg-white placeholder-slate-500 shadow-md"
           type="text"

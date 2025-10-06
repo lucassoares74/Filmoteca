@@ -115,6 +115,7 @@ export const AppProvider = ({ children }) => {
         totalresults,
         FullList,
         loadingList,
+        setSearchparam,
       }}
     >
       {children}

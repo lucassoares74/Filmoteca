@@ -1,33 +1,35 @@
 import Navbar from "./../components/Navbar";
 import SearchBar from "./../components/SearchBar";
 import Footer from "./../components/Footer";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "./../contexts/AppContext";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 function Searchpage() {
-  const navigate = useNavigate()
-  const { setpage, page, totalresults, FullList, loadingList } =
+  const [searchParams] = useSearchParams();
+  const name = searchParams.get("name");
+
+  const navigate = useNavigate();
+  const { setpage, page, totalresults, FullList, loadingList, setSearchparam } =
     useContext(AppContext);
+  useEffect(() => {
+    setSearchparam(name);
+  }, []);
   function isArr() {
     console.log(loadingList);
 
     if (loadingList === false && Array.isArray(FullList.Search)) {
       return FullList.Search.map((a) => {
-        return(
+        return (
           <div className="bg-slate-400 p-2 rounded-md shadow-black shadow-2xl flex gap-1 justify-center">
-            <img
-              className="h-[250px] rounded-md"
-              src={a.Poster}
-              alt=""
-            />
+            <img className="h-[250px] rounded-md" src={a.Poster} alt="" />
             <div className="flex flex-col justify-center place-items-center">
               <h1 className="text-gray-300">{a.Year}</h1>
               <h1 className="text-[16px]">{a.Title}</h1>
             </div>
           </div>
-        )
-      
+        );
       });
     }
   }
@@ -36,9 +38,7 @@ function Searchpage() {
       <Navbar></Navbar>
       <SearchBar></SearchBar>
       <div className="flex mt-4 mb-4 justify-center ">
-        <div className="grid grid-cols-5 gap-2">
-        {isArr()}
-        </div>
+        <div className="grid grid-cols-5 gap-2">{isArr()}</div>
       </div>
       <div className="flex justify-center gap-2">
         <button
